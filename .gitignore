@@ -1,0 +1,8 @@
+*.pdf
+*.o
+.vscode
+*.json
+*.csv
+btc
+RPN
+PMergeMe
