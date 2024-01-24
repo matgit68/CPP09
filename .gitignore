@@ -3,6 +3,7 @@
 .vscode
 *.json
 *.csv
+*.txt
 btc
 RPN
 PMergeMe

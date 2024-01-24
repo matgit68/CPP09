@@ -24,7 +24,10 @@ BitcoinExchange::BitcoinExchange(std::string csvfile) {
             _rate[date] = value;
         } else throw line;
     }
-    in.close();}
+    in.close();
+	if (!_rate.empty())
+		_lastDate = _rate.rbegin()->first;
+}
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &ref) : _rate(ref._rate) {}
 
@@ -35,10 +38,45 @@ BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &ref) {
 	return *this;
 }
 
-void BitcoinExchange::display() {
+void BitcoinExchange::display() const{
  for (std::map<std::string, float>::const_iterator it = _rate.begin(); it != _rate.end(); ++it)
         std::cout << it->first << " -> " << it->second << std::endl;
 }
+
+void BitcoinExchange::process(std::string line) {
+	if (line.size() < 14 || line.substr(10, 3) != " | ") {
+		std::cout << "Error: bad format => " << line << std::endl;
+		return ;
+	}
+	std::string date = line.substr(0, 10);
+	if (!dateOk(date)) {
+		std::cout << "Error: wrong date format => " << date << std::endl;
+		return ;
+	}
+	if (date < _rate.begin()->first || date > _rate.rbegin()->first) {
+		std::cout << "Error: date out of reference data range" << std::endl;
+		return;
+	}
+	std::string strVal = line.substr(13, line.size());
+	if (strVal.find_first_not_of("0123456789.") != std::string::npos
+		|| countOccurrences('.', strVal) > 1
+		|| strVal.size() > 4) {
+		std::cout << "Error: wrong value format => " << strVal << std::endl;
+		return ;
+	}
+	convert(date, std::atof(strVal.c_str()));
+}
+
+void BitcoinExchange::convert(std::string date, float value) {
+	std::map<std::string, float>::iterator it;
+
+	it = _rate.lower_bound(date);
+	if (it->first > date) 
+		it--;
+	std::cout << it->first << "(" << it->second << ") => ";
+	std::cout << value << " = " << value * it->second << std::endl;
+}
+
 
 bool checkDigitDate(std::string date) {
 	int year = atoi(date.substr(0,4).c_str());
@@ -56,4 +94,12 @@ bool dateOk(std::string date) {
 		!isdigit(date[5]) || !isdigit(date[6]) || !isdigit(date[8]) || !isdigit(date[9]))
 		return false;
 	return (checkDigitDate(date));
+}
+
+int countOccurrences(char target, const std::string &str) {
+    int count = 0;
+    for (std::size_t i = 0; i < str.size(); i++)
+        if (str[i] == target)
+            count++;
+    return count;
 }
