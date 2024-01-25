@@ -12,9 +12,8 @@
 class BitcoinExchange {
 private:
 	std::map<std::string, float> _rate;
-	std::string _lastDate;
-public:
 	BitcoinExchange();
+public:
 	BitcoinExchange(std::string csvfile);
 	BitcoinExchange(BitcoinExchange const &ref);
 	~BitcoinExchange();

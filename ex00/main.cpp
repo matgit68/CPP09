@@ -28,6 +28,5 @@ int main(int argc, char **argv) {
         std::cout << "Exception : wrong data type at line : " << line << std::endl;
         return EXIT_FAILURE;
     }
-    // btc.display();
     return EXIT_SUCCESS;
 }
