@@ -1,8 +1,3 @@
-// btc 		vector / queue
-// RPN 		stack
-// PMergeMe	ForwardList
-// 			deque
-
 #include "BitcoinExchange.hpp"
 
 BitcoinExchange::BitcoinExchange() {}

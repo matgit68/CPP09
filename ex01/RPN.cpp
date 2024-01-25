@@ -28,8 +28,6 @@ RPN &RPN::operator=(const RPN &ref) {
 }
 
 void RPN::compute() {
-	int res = 0;
-
 	for (size_t i = 0; i < _exp.size(); i++) {
 		if (_exp[i] == ' ')
 			continue;
@@ -46,11 +44,9 @@ void RPN::compute() {
 				divide();
 		} catch (const char *error) { throw error ;}
 	}
-	res = _stack.top();
-	_stack.pop();
-	if (!_stack.empty())
+	if (_stack.size() > 1)
 		throw "not empty stack";
-	std::cout << res << std::endl;
+	std::cout << _stack.top() << std::endl;
 }
 
 void RPN::add() {

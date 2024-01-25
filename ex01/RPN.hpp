@@ -1,10 +1,8 @@
 #pragma once
 
-#include <iomanip>
 #include <string>
 #include <stack>
 #include <iostream>
-#include <stdlib.h> 
 
 class RPN {
 private:
