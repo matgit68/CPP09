@@ -43,23 +43,23 @@ void BitcoinExchange::display() const{
 
 void BitcoinExchange::process(std::string line) {
 	if (line.size() < 14 || line.substr(10, 3) != " | ") {
-		std::cout << "Error: bad format /!\\ " << line << std::endl;
+		std::cerr << "Error: bad format /!\\ " << line << std::endl;
 		return ;
 	}
 	std::string date = line.substr(0, 10);
 	if (!dateOk(date)) {
-		std::cout << "Error: wrong date format /!\\ " << date << std::endl;
+		std::cerr << "Error: wrong date format /!\\ " << date << std::endl;
 		return ;
 	}
 	if (date < _rate.begin()->first || date > _rate.rbegin()->first) {
-		std::cout << "Error: date out of reference data range /!\\" << date << std::endl;
+		std::cerr << "Error: date out of reference data range /!\\" << date << std::endl;
 		return;
 	}
 	std::string strVal = line.substr(13, line.size());
 	if (strVal.find_first_not_of("0123456789.") != std::string::npos
 		|| countOccurrences('.', strVal) > 1
 		|| strVal.size() > 4) {
-		std::cout << "Error: wrong value format /!\\ " << strVal << std::endl;
+		std::cerr << "Error: wrong value format /!\\ " << strVal << std::endl;
 		return ;
 	}
 	convert(date, std::atof(strVal.c_str()));

@@ -5,7 +5,7 @@ int main(int argc, char **argv) {
     std::string line;
 
     if (argc != 2) {
-        std::cout << "Usage : btc <input file>" << std::endl;
+        std::cerr << "Usage : btc <input file>" << std::endl;
         return EXIT_FAILURE;
     }
     try {
@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
             if (in.fail()) throw std::ios_base::failure("Can't open file");
             std::getline(in, line);
             if (line != "date | value") {
-                std::cout << "Wrong header in input file" << std::endl;
+                std::cerr << "Wrong header in input file" << std::endl;
                 return EXIT_FAILURE;
 	        }
             while (std::getline(in, line))
@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
             return EXIT_FAILURE;
         }
     } catch(const std::string &line) {
-        std::cout << "Exception : wrong data type at line : " << line << std::endl;
+        std::cerr << "Exception : wrong data type at line : " << line << std::endl;
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
