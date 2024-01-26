@@ -1,4 +1,5 @@
 #include "PMergeMe.hpp"
+#include <ctime>
 
 int main(int argc, char **argv) {
     std::vector<unsigned int> vec;
@@ -17,7 +18,32 @@ int main(int argc, char **argv) {
 		vec.push_back((unsigned int) tmp);
 		deq.push_back((unsigned int) tmp);
 	}
-	FJsortV(vec);
-	// sort(deq);
+
+	for(size_t i = 0; i < 10; i++)
+		std::cout << vec[i] << ' ';
+	std::cout << "..." << std::endl;
+	for(size_t i = 0; i < 10; i++)
+		std::cout << deq[i] << ' ';
+	std::cout << "..." << std::endl;
+
+    clock_t start_time = clock();
+	mergeSortV(vec);
+    clock_t end_time = clock();
+    double elapsed_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
+    std::cout << "Temps écoulé pour vector : " << elapsed_time << " secondes." << std::endl;
+
+    start_time = clock();
+	mergeSortD(deq);
+    end_time = clock();
+    elapsed_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
+    std::cout << "Temps écoulé pour deque  : " << elapsed_time << " secondes." << std::endl;
+
+	for(size_t i = 0; i < 10; i++)
+		std::cout << vec[i] << ' ';
+	std::cout << "..." << std::endl;
+	for(size_t i = 0; i < 10; i++)
+		std::cout << deq[i] << ' ';
+	std::cout << "..." << std::endl;
+
     return 0;
 }
