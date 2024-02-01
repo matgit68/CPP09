@@ -8,10 +8,8 @@ BitcoinExchange::BitcoinExchange(std::string csvfile) {
 	std::string date;
 	float value;
 
-    try {
-	    in.open(csvfile.c_str());
-        if (in.fail()) throw std::ios_base::failure("Can't open data file");
-    } catch (const std::ios_base::failure& e) { std::cerr << "Exception : " << e.what() << std::endl; }
+	in.open(csvfile.c_str());
+	if (in.fail()) throw std::ios_base::failure("Can't open data file");
     std::getline(in, line);
 	while (std::getline(in, line)) {
         std::istringstream ligneStream(line);

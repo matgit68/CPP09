@@ -9,8 +9,7 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
     try {
-        BitcoinExchange btc("data.csv");
-        try {
+            BitcoinExchange btc("data.csv");
             in.open(argv[1]);
             if (in.fail()) throw std::ios_base::failure("Can't open file");
             std::getline(in, line);
@@ -24,9 +23,9 @@ int main(int argc, char **argv) {
             std::cerr << "Exception : " << e.what() << std::endl;
             return EXIT_FAILURE;
         }
-    } catch(const std::string &line) {
-        std::cerr << "Exception : wrong data type at line : " << line << std::endl;
-        return EXIT_FAILURE;
-    }
+        catch(const std::string &line) {
+            std::cerr << "Exception : wrong data type at line : " << line << std::endl;
+            return EXIT_FAILURE;
+        }
     return EXIT_SUCCESS;
 }
