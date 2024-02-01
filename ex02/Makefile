@@ -2,13 +2,13 @@ RED		:= \033[31;1m
 YELLOW	:= \033[33;1m
 RESET	:= \033[0m
 
-NAME = PMergeMe
+NAME = PmergeMe
 
 CXX = c++
 CPPFLAGS = -std=c++98 -Wall -Wextra -Werror -fsanitize=address -g3
 
 SRC =	main.cpp\
-		PMergeMe.cpp\
+		PmergeMe.cpp\
 
 OBJ = $(SRC:.cpp=.o)
 

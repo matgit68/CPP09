@@ -1,4 +1,4 @@
-#include "PMergeMe.hpp"
+#include "PmergeMe.hpp"
 
 void insertSortV(std::vector<unsigned int> &vec) {
 	for(size_t i = 1; i < vec.size(); i++){

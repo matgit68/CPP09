@@ -1,4 +1,4 @@
-#include "PMergeMe.hpp"
+#include "PmergeMe.hpp"
 #include <ctime>
 
 int main(int argc, char **argv) {
