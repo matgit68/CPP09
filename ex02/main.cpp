@@ -19,10 +19,10 @@ int main(int argc, char **argv) {
 		deq.push_back((unsigned int) tmp);
 	}
 
-	for(size_t i = 0; i < 10; i++)
+	for(size_t i = 0; i < vec.size() && i < 10; i++)
 		std::cout << vec[i] << ' ';
 	std::cout << "..." << std::endl;
-	for(size_t i = 0; i < 10; i++)
+	for(size_t i = 0; i < deq.size() && i < 10; i++)
 		std::cout << deq[i] << ' ';
 	std::cout << "..." << std::endl;
 
@@ -38,10 +38,10 @@ int main(int argc, char **argv) {
     elapsed_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
     std::cout << "Temps écoulé pour deque  : " << elapsed_time << " secondes." << std::endl;
 
-	for(size_t i = 0; i < 10; i++)
+	for(size_t i = 0; i < vec.size() && i < 10; i++)
 		std::cout << vec[i] << ' ';
 	std::cout << "..." << std::endl;
-	for(size_t i = 0; i < 10; i++)
+	for(size_t i = 0; i < deq.size() && i < 10; i++)
 		std::cout << deq[i] << ' ';
 	std::cout << "..." << std::endl;
 
