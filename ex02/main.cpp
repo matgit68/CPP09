@@ -8,7 +8,9 @@ int main(int argc, char **argv) {
     clock_t first_start_time, start_time, end_time;
 	double elapsed_time;
 
-    if (argc < 2)
+    // on met le contenu de argv dans un vector 'init'
+	// init servira a remplir le vector vec et la deque deq.
+	if (argc < 2)
 		return 1;
 	for (int i = 1; argv[i]; i++) {
 		std::string str(argv[i]);
