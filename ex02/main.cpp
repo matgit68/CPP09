@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 
 	////////////////////////////////////// VECTOR //////////////////////////////////////
     first_start_time = clock();
-	for(int j = 0; j < 10; j++)
+	for(int j = 0; j < 1; j++)
 		for(std::vector<unsigned int>::iterator it = init.begin(); it != init.end(); it++)
 			vec.push_back(*it);
     end_time = clock();
@@ -49,7 +49,7 @@ int main(int argc, char **argv) {
 
 	////////////////////////////////////// DEQUE //////////////////////////////////////
     first_start_time = clock();
-	for(int j = 0; j < 10; j++)
+	for(int j = 0; j < 1; j++)
 		for(size_t i = 0; i < init.size(); i++)
 			deq.push_back(init[i]);
     end_time = clock();

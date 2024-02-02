@@ -24,7 +24,7 @@ void insertSort(T &c) {
 
 template <typename T>
 void mergeSort(T &c) {
-	if (c.size() <= 50) insertSort(c);
+	if (c.size() <= 40) insertSort(c);
 	else {
 		typename T::iterator iter = c.begin() + c.size() / 2;
 		T c1(c.begin(), iter);
