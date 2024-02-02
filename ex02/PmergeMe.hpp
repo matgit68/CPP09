@@ -9,29 +9,31 @@
 #include <stdlib.h>
 
 template <typename T>
-void insertSort(T &vec) {
-	for(size_t i = 1; i < vec.size(); i++){
-		unsigned int x = vec[i];
-		for(size_t j = i-1; j != 0 && vec[j] > x; j--){
-            unsigned int temp = vec[j+1];
-            vec[j+1] = vec[j];
-            vec[j] = temp;
-		}
+void insertSort(T &c) {
+	unsigned int x;
+	size_t j;
+
+	for(size_t i = 1; i < c.size(); i++){
+		x = c[i];
+		j = i;
+		while(j-- > 0 && c[j] > x)
+            c[j + 1] = c[j];
+		c[j + 1] = x;
 	}
 }
 
 template <typename T>
-void mergeSort(T &vec) {
-	if (vec.size() <= 5) insertSort(vec);
+void mergeSort(T &c) {
+	if (c.size() <= 50) insertSort(c);
 	else {
-		typename T::iterator iter = vec.begin() + vec.size() / 2;
-		T v1(vec.begin(), iter);
-		T v2(iter, vec.end());
+		typename T::iterator iter = c.begin() + c.size() / 2;
+		T c1(c.begin(), iter);
+		T c2(iter, c.end());
 
-		mergeSort(v1);
-		mergeSort(v2);
+		mergeSort(c1);
+		mergeSort(c2);
 
-		vec.clear();
-		std::merge(v1.begin(), v1.end(), v2.begin(), v2.end(), std::back_inserter(vec));
+		c.clear();
+		std::merge(c1.begin(), c1.end(), c2.begin(), c2.end(), std::back_inserter(c));
 	}
 }

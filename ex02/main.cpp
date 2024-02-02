@@ -2,9 +2,11 @@
 #include <ctime>
 
 int main(int argc, char **argv) {
-    std::vector<unsigned int> vec;
+    std::vector<unsigned int> vec, init;
     std::deque<unsigned int> deq;
     unsigned long tmp;
+    clock_t first_start_time, start_time, end_time;
+	double elapsed_time;
 
     if (argc < 2)
 		return 1;
@@ -15,35 +17,60 @@ int main(int argc, char **argv) {
 		tmp = atol(argv[i]);
 		if (tmp > 4294967295)
 			return 3;
-		vec.push_back((unsigned int) tmp);
-		deq.push_back((unsigned int) tmp);
+		init.push_back((unsigned int) tmp);
 	}
 
+	////////////////////////////////////// VECTOR //////////////////////////////////////
+    first_start_time = clock();
+	for(int j = 0; j < 10; j++)
+		for(std::vector<unsigned int>::iterator it = init.begin(); it != init.end(); it++)
+			vec.push_back(*it);
+    end_time = clock();
+    elapsed_time = static_cast<double>(end_time - first_start_time) / CLOCKS_PER_SEC;
+    std::cout << "Affectation de " << vec.size() << " éléments dans vector : " << elapsed_time << " secondes." << std::endl;
 
-    clock_t start_time = clock();
-	for(size_t i = 0; i < vec.size() && i < 10; i++)
+	for(size_t i = 0; i < vec.size() && i < 15; i++)
 		std::cout << vec[i] << ' ';
 	std::cout << "..." << std::endl;
+	
+	start_time = clock();
 	mergeSort(vec);
-	for(size_t i = 0; i < vec.size() && i < 10; i++)
+    end_time = clock();
+    elapsed_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
+    std::cout << "Tri de vector : " << elapsed_time << " secondes." << std::endl;
+
+	for(size_t i = 0; i < vec.size() && i < 15; i++)
 		std::cout << vec[i] << ' ';
 	std::cout << "..." << std::endl;
-    clock_t end_time = clock();
-    double elapsed_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
-    std::cout << "Temps écoulé pour vector : " << elapsed_time << " secondes." << std::endl;
+    end_time = clock();
+    elapsed_time = static_cast<double>(end_time - first_start_time) / CLOCKS_PER_SEC;
+    std::cout << "Temps total pour vector : " << elapsed_time << " secondes (" << vec.size() << " elements)." << std::endl << std::endl;
 
-    start_time = clock();
-	for(size_t i = 0; i < deq.size() && i < 10; i++)
+
+	////////////////////////////////////// DEQUE //////////////////////////////////////
+    first_start_time = clock();
+	for(int j = 0; j < 10; j++)
+		for(size_t i = 0; i < init.size(); i++)
+			deq.push_back(init[i]);
+    end_time = clock();
+    elapsed_time = static_cast<double>(end_time - first_start_time) / CLOCKS_PER_SEC;
+    std::cout << "Affectation de " << deq.size() << " éléments dans deque : " << elapsed_time << " secondes." << std::endl;
+
+	for(size_t i = 0; i < deq.size() && i < 15; i++)
 		std::cout << deq[i] << ' ';
 	std::cout << "..." << std::endl;
+	
+	start_time = clock();
 	mergeSort(deq);
-	for(size_t i = 0; i < deq.size() && i < 10; i++)
+    end_time = clock();
+    elapsed_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
+    std::cout << "Tri de deque : " << elapsed_time << " secondes." << std::endl;
+
+	for(size_t i = 0; i < deq.size() && i < 15; i++)
 		std::cout << deq[i] << ' ';
 	std::cout << "..." << std::endl;
     end_time = clock();
-    elapsed_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
-    std::cout << "Temps écoulé pour deque  : " << elapsed_time << " secondes." << std::endl;
-
-
+    elapsed_time = static_cast<double>(end_time - first_start_time) / CLOCKS_PER_SEC;
+    std::cout << "Temps total pour deque : " << elapsed_time << " secondes (" << deq.size() << " elements)." << std::endl;
     return 0;
 }
