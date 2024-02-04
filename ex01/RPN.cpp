@@ -92,6 +92,8 @@ void RPN::divide() {
 	_stack.pop();
 		if (_stack.empty())
 		throw "empty stack";
+	if (res == 0)
+		throw "division by zero";
 	res = _stack.top() / res;
 	_stack.pop();
 	_stack.push(res);

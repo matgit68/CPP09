@@ -49,9 +49,7 @@ void BitcoinExchange::process(std::string line) {
 		return;
 	}
 	std::string strVal = line.substr(13, line.size());
-	if (strVal.find_first_not_of("0123456789.") != std::string::npos
-		|| countOccurrences('.', strVal) > 1
-		|| strVal.size() > 4) {
+	if (!valueOk(strVal)) {
 		std::cerr << "Error: wrong value format /!\\ " << strVal << std::endl;
 		return ;
 	}
@@ -76,6 +74,13 @@ bool checkDigitDate(std::string date) {
 	if (year < 1970 || month > 12 || day > maxDaysInMonths[month - 1])
 		return false;
 	return true;
+}
+
+bool valueOk(std::string value) {
+	if (value.find_first_not_of("0123456789.") != std::string::npos
+		|| countOccurrences('.', value) > 1)
+		return false;
+	return (std::atof(value.c_str()) < 1000);
 }
 
 bool dateOk(std::string date) {
